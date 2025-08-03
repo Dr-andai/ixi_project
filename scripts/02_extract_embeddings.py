@@ -74,7 +74,7 @@ def save_embeddings(embeddings, save_path):
 if __name__ == "__main__":
     base_folder = "data/ixi_png_dataset"
     output_base = "embeddings/embeddings_output"
-    modalities = ["t1", "t2"]  # Could also add 'label' if needed
+    modalities = ["t1", "t2"]
 
     for patient_id in tqdm(sorted(os.listdir(base_folder)), desc="Patients"):
         patient_folder = os.path.join(base_folder, patient_id)

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Participant Similarity Search</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body>
+    <h2>Find Similar MRI Participants</h2>
+    <form hx-get="/search" hx-target="#results" hx-swap="innerHTML">
+        <input type="text" name="participant_id" placeholder="Enter Participant ID" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="results" style="margin-top:20px;"></div>
+</body>
+</html>

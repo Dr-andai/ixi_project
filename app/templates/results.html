@@ -1,0 +1,19 @@
+<h3>Top 5 Similar Participants</h3>
+<table border="1">
+    <tr>
+        <th>Participant ID</th>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>Height</th>
+        <th>Weight</th>
+    </tr>
+    {% for row in results %}
+    <tr>
+        <td>{{ row.participant_id }}</td>
+        <td>{{ row.age }}</td>
+        <td>{{ row.sex }}</td>
+        <td>{{ row.height }}</td>
+        <td>{{ row.weight }}</td>
+    </tr>
+    {% endfor %}
+</table>
