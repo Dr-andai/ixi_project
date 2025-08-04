@@ -4,13 +4,36 @@
     <title>Participant Similarity Search</title>
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </head>
-<body>
-    <h2>Find Similar MRI Participants</h2>
-    <form hx-get="/search" hx-target="#results" hx-swap="innerHTML">
-        <input type="text" name="participant_id" placeholder="Enter Participant ID" required>
-        <button type="submit">Search</button>
+<body style="font-family: Arial, sans-serif; padding: 40px; max-width: 600px; margin: auto;">
+
+    <h2 style="color: #333;">Find Similar MRI Participants</h2>
+
+    <form hx-get="/search" hx-target="#results" hx-swap="innerHTML" style="margin-bottom: 20px;">
+        <input type="text" name="participant_id" id="participantInput" placeholder="Enter Participant ID" 
+               required style="padding: 8px; width: 70%; border: 1px solid #ccc; border-radius: 4px;">
+        <button type="submit" style="padding: 8px 16px; background-color: #007BFF; color: white; 
+                border: none; border-radius: 4px; cursor: pointer;">
+            Search
+        </button>
     </form>
 
-    <div id="results" style="margin-top:20px;"></div>
+    <div style="margin-bottom: 20px;">
+        <strong>Try an example:</strong>
+        <span style="margin-left: 10px;">
+            <a href="#" onclick="setParticipantId('IXI002')">IXI002</a>,
+            <a href="#" onclick="setParticipantId('IXI013')">IXI013</a>,
+            <a href="#" onclick="setParticipantId('IXI066')">IXI066</a>,
+            <a href="#" onclick="setParticipantId('IXI112')">IXI112</a>,
+            <a href="#" onclick="setParticipantId('IXI222')">IXI222</a>
+        </span>
+    </div>
+
+    <div id="results" style="border-top: 1px solid #eee; padding-top: 20px;"></div>
+
+    <script>
+        function setParticipantId(id) {
+            document.getElementById('participantInput').value = id;
+        }
+    </script>
 </body>
 </html>
