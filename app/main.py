@@ -9,7 +9,12 @@ from db.utilis.queries import get_top_similar_metadata
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+# Mount for image dataset
+app.mount("/static", StaticFiles(directory="data/ixi_png_dataset"), name="static")
+
+# Mount for CSS and other assets
+app.mount("/assets", StaticFiles(directory="app/static"), name="assets")
 
 def get_db():
     db = SessionLocal()

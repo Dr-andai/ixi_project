@@ -1,19 +1,25 @@
 <h3>Top 5 Similar Participants</h3>
-<table border="1">
-    <tr>
-        <th>Participant ID</th>
-        <th>Age</th>
-        <th>Sex</th>
-        <th>Height</th>
-        <th>Weight</th>
-    </tr>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
     {% for row in results %}
-    <tr>
-        <td>{{ row.participant_id }}</td>
-        <td>{{ row.age }}</td>
-        <td>{{ row.sex }}</td>
-        <td>{{ row.height }}</td>
-        <td>{{ row.weight }}</td>
-    </tr>
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 200px;">
+        <!-- Thumbnail image (with fallback if not available) -->
+        {% if row.image_path %}
+        <img src="{{ row.image_path }}" alt="MRI Slice" style="width: 100%; border-radius: 8px;">
+        {% else %}
+        <div style="width: 100%; height: 150px; background-color: #eee; text-align: center; line-height: 150px;">
+            No Image
+        </div>
+        {% endif %}
+
+        <!-- Participant metadata -->
+        <h4>{{ row.participant_id }}</h4>
+        <p><strong>Age:</strong> {{ row.age }}</p>
+        <p><strong>Sex:</strong> {{ row.sex }}</p>
+        <p><strong>Height:</strong> {{ row.height }}</p>
+        <p><strong>Weight:</strong> {{ row.weight }}</p>
+        {% if row.distance %}
+        <p><strong>Similarity:</strong> {{ "%.3f"|format(row.distance) }}</p>
+        {% endif %}
+    </div>
     {% endfor %}
-</table>
+</div>
