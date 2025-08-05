@@ -4,9 +4,23 @@
     <title>Participant Similarity Search</title>
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </head>
-<body style="font-family: Arial, sans-serif; padding: 40px; max-width: 600px; margin: auto;">
+<body style="font-family: Arial, sans-serif; padding: 40px; max-width: 700px; margin: auto;">
 
-    <h2 style="color: #333;">Find Similar MRI Participants</h2>
+    <h1 style="color: #333;">Brain MRI Similarity Explorer</h1>
+
+    <p style="line-height: 1.6; color: #444;">
+        This project allows you to find participants with similar brain MRI scans based on their imaging.
+        The goal is to support clinical and research workflows by making it easier to discover comparable cases in a dataset.
+    </p>
+
+    <h3 style="color: #333; margin-top: 30px;">How it works</h3>
+    <ol style="line-height: 1.6; color: #444;">
+        <li>Enter or select a <strong>Participant ID</strong> below.</li>
+        <li>The system will retrieve the most similar participants based on embeddings.</li>
+        <li>You’ll see a table showing top matches and links to their MRI images.</li>
+    </ol>
+
+    <h2 style="color: #333; margin-top: 40px;">Find Similar MRI Participants</h2>
 
     <form hx-get="/search" hx-target="#results" hx-swap="innerHTML" style="margin-bottom: 20px;">
         <input type="text" name="participant_id" id="participantInput" placeholder="Enter Participant ID" 

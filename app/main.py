@@ -13,7 +13,7 @@ templates = Jinja2Templates(directory="app/templates")
 # Mount for image dataset
 app.mount("/static", StaticFiles(directory="data/ixi_png_dataset"), name="static")
 
-# Dependency to get DB session
+# DB session
 def get_db():
     db = SessionLocal()
     try:
@@ -21,12 +21,12 @@ def get_db():
     finally:
         db.close()
 
-# Render homepage with form
+# Homepage
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# Handle search and render results
+# Render results
 @app.get("/search", response_class=HTMLResponse)
 def search(request: Request, participant_id: str, db: Session = Depends(get_db)):
     results = get_top_similar_metadata(db, participant_id)

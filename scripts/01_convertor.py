@@ -9,7 +9,7 @@ input_base = "data/ixi_dataset"
 output_base = "data/ixi_png_dataset"
 rotation_angle = 90
 
-# Get list of patients
+# List of patients
 patient_ids = [d for d in os.listdir(input_base) if os.path.isdir(os.path.join(input_base, d))]
 
 for patient_id in tqdm(patient_ids, desc="Processing patients"):
