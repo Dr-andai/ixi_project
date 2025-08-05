@@ -4,15 +4,14 @@ from sqlalchemy.orm import Session
 
 def get_top_similar_metadata(session: Session, participant_id: str, top_k: int = 5):
     sql = text("""
-        SELECT DISTINCT ON (pm.participant_id) 
+        SELECT 
             pm.*, 
             me2.embedding <#> me1.embedding AS distance
         FROM mri_embeddings me1
         JOIN mri_embeddings me2 ON me1.id != me2.id
         JOIN participant_metadata pm ON me2.participant_id = pm.participant_id
         WHERE me1.participant_id = :pid
-        AND me2.participant_id != :pid
-        ORDER BY pm.participant_id, distance ASC
+        ORDER BY distance ASC
         LIMIT :k
     """)
     rows = session.execute(sql, {"pid": participant_id, "k": top_k}).fetchall()
@@ -48,3 +47,4 @@ def get_top_similar_metadata(session: Session, participant_id: str, top_k: int =
         })
 
     return results
+

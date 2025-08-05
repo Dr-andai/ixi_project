@@ -1,25 +1,39 @@
-<h3>Top 5 Similar Participants</h3>
-<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-    {% for row in results %}
-    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 200px;">
-        <!-- Thumbnail image (with fallback if not available) -->
-        {% if row.image_path %}
-        <img src="{{ row.image_path }}" alt="MRI Slice" style="width: 100%; border-radius: 8px;">
-        {% else %}
-        <div style="width: 100%; height: 150px; background-color: #eee; text-align: center; line-height: 150px;">
-            No Image
-        </div>
-        {% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Similar Participants</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 2rem;">
+    <h2 style="text-align: center;">Top 5 Similar Participants</h2>
 
-        <!-- Participant metadata -->
-        <h4>{{ row.participant_id }}</h4>
-        <p><strong>Age:</strong> {{ row.age }}</p>
-        <p><strong>Sex:</strong> {{ row.sex }}</p>
-        <p><strong>Height:</strong> {{ row.height }}</p>
-        <p><strong>Weight:</strong> {{ row.weight }}</p>
-        {% if row.distance %}
-        <p><strong>Similarity:</strong> {{ "%.3f"|format(row.distance) }}</p>
-        {% endif %}
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
+        {% for row in results %}
+        <div style="border: 1px solid #ddd; border-radius: 10px; padding: 1rem; width: 220px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+            <!-- Thumbnail image (with fallback if not available) -->
+            {% if row.image_path %}
+            <img src="{{ row.image_path }}" alt="MRI Slice" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem;">
+            {% else %}
+            <div style="width: 100%; height: 150px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #777; margin-bottom: 1rem;">
+                No Image
+            </div>
+            {% endif %}
+
+            <!-- Participant metadata -->
+            <h3 style="margin: 0 0 0.5rem;">{{ row.participant_id }}</h3>
+            <p><strong>Age:</strong> {{ row.age }}</p>
+            <p><strong>Sex:</strong> {{ row.sex }}</p>
+            <p><strong>Height:</strong> {{ row.height }}</p>
+            <p><strong>Weight:</strong> {{ row.weight }}</p>
+            {% if row.distance %}
+            <p><strong>Similarity:</strong> {{ "%.3f"|format(row.distance) }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="/" style="text-decoration: none; color: #007BFF;">← Search Again</a>
+    </div>
+</body>
+</html>
