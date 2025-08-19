@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 10000
 
 # Start command (Gunicorn + Uvicorn worker)
-CMD ["gunicorn", "app.main:app", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:$PORT"]
+CMD ["gunicorn", "app.main:app", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:${PORT}"]
