@@ -1,23 +1,28 @@
-# Use slim Python image for smaller size
+# Use official Python image
 FROM python:3.11-slim
 
-# Set working directory
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set work directory
 WORKDIR /app
 
-# Install system dependencies for psycopg2
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libpq-dev gcc build-essential \
+    build-essential \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app files
+# Copy project
 COPY . .
 
-# Expose port
-EXPOSE $PORT
+# Expose the port Render will use
+EXPOSE 10000
 
-# Start the app (Render overrides port via $PORT)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+# Start command (Gunicorn + Uvicorn worker)
+CMD ["gunicorn", "app.main:app", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:$PORT"]
